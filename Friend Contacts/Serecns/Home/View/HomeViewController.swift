@@ -15,7 +15,7 @@ class HomeViewController: UIViewController {
     
     private let cellIdentifier: String = "homeCell"
     
-    private var selectedContacts: [CNContact] = []
+    private var selectedContacts: String = ""
     
     @IBOutlet weak var noContactsLabel: UILabel!
     @IBOutlet weak var contactsTabelView: UITableView!
@@ -56,19 +56,30 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func sendMailButtonAction(_ sender: UIButton) {
-        guard !selectedContacts.isEmpty else {
-            let alert = UIAlertController(title: "No Contacts Selected", message: "Please select at least one contact to send mail.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
+        
+        if selectedContacts.isEmpty {
+            let alert = UIAlertController(title: "Error", message: "Mail services are not available", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(okAction)
+            present(alert, animated: true)
+            return
+        } else {
+            print(selectedContacts)
+            
+            sendMail(to: selectedContacts)
+        }
+ /*
+
+        guard MFMailComposeViewController.canSendMail() else {
+            let alert = UIAlertController(title: "Error", message: "Mail services are not available", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(okAction)
             present(alert, animated: true)
             return
         }
         
-        let mailComposerVC = MFMailComposeViewController()
-        mailComposerVC.mailComposeDelegate = self
-        mailComposerVC.setToRecipients(selectedContacts.compactMap { $0.emailAddresses.first?.value as String? })
-        mailComposerVC.setSubject("Hello")
-        mailComposerVC.setMessageBody("This is a random message.", isHTML: false)
-        present(mailComposerVC, animated: true)
+        sendMail(to: selectedContacts)
+ */
     }
     
     
@@ -112,7 +123,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         contactViewController.allowsEditing = false
         contactViewController.allowsActions = false
         
-        selectedContacts = [contact]
+        
+        selectedContacts = friend.workEmail
+        
+        print(selectedContacts)
         //navigationController?.pushViewController(contactViewController, animated: true)
     }
     
@@ -134,7 +148,16 @@ extension HomeViewController: CNContactPickerDelegate {
 
 
 extension HomeViewController: MFMailComposeViewControllerDelegate {
+    func sendMail(to recipients: String) {
+        let mailVC = MFMailComposeViewController()
+        mailVC.mailComposeDelegate = self
+        mailVC.setToRecipients([recipients])
+        mailVC.setSubject("My Email Subject")
+        mailVC.setMessageBody("My email message body", isHTML: false)
+        present(mailVC, animated: true, completion: nil)
+    }
+    
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        dismiss(animated: true, completion: nil)
+        controller.dismiss(animated: true, completion: nil)
     }
 }
