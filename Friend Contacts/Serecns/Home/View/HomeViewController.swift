@@ -37,11 +37,6 @@ class HomeViewController: UIViewController {
         self.contactsTabelView.register(UINib(nibName: "HomeTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         // Do any additional setup after loading the view.
         
-        if friendsList.count != 0 {
-            noContactsLabel.isHidden = true
-        } else {
-            noContactsLabel.isHidden = false
-        }
     }
     
     
@@ -64,8 +59,6 @@ class HomeViewController: UIViewController {
             present(alert, animated: true)
             return
         } else {
-            print(selectedContacts)
-            
             sendMail(to: selectedContacts)
         }
     }
