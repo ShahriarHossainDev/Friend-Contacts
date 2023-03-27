@@ -17,6 +17,7 @@
 		FA29BC7B29D189CE0036FAA0 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA29BC7A29D189CE0036FAA0 /* HomeViewModel.swift */; };
 		FA29BC7F29D18B0D0036FAA0 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA29BC7D29D18B0D0036FAA0 /* HomeTableViewCell.swift */; };
 		FA29BC8029D18B0D0036FAA0 /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA29BC7E29D18B0D0036FAA0 /* HomeTableViewCell.xib */; };
+		FA29BC8229D18CF20036FAA0 /* Extenstions+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA29BC8129D18CF20036FAA0 /* Extenstions+View.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		FA29BC7A29D189CE0036FAA0 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		FA29BC7D29D18B0D0036FAA0 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		FA29BC7E29D18B0D0036FAA0 /* HomeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeTableViewCell.xib; sourceTree = "<group>"; };
+		FA29BC8129D18CF20036FAA0 /* Extenstions+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extenstions+View.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 		FA29BC6F29D1876C0036FAA0 /* Extenstions */ = {
 			isa = PBXGroup;
 			children = (
+				FA29BC8129D18CF20036FAA0 /* Extenstions+View.swift */,
 			);
 			path = Extenstions;
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 				FA29BC7F29D18B0D0036FAA0 /* HomeTableViewCell.swift in Sources */,
 				FA29BC7929D189B40036FAA0 /* HomeModel.swift in Sources */,
 				FA29BC5929D1872D0036FAA0 /* AppDelegate.swift in Sources */,
+				FA29BC8229D18CF20036FAA0 /* Extenstions+View.swift in Sources */,
 				FA29BC5B29D1872D0036FAA0 /* SceneDelegate.swift in Sources */,
 				FA29BC7B29D189CE0036FAA0 /* HomeViewModel.swift in Sources */,
 				FA29BC7729D1896B0036FAA0 /* HomeViewController.swift in Sources */,

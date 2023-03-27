@@ -20,14 +20,51 @@
                                 <rect key="frame" x="0.0" y="140" width="414" height="756"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Contacts with email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBM-6o-PHP">
+                                <rect key="frame" x="119" y="439" width="176.5" height="18.5"/>
+                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="16"/>
+                                <color key="textColor" red="0.0" green="0.1176470588" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bjp-X8-05d">
+                                <rect key="frame" x="155" y="778" width="104" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kCG-Jg-PtI">
+                                        <rect key="frame" x="2" y="2" width="100" height="40"/>
+                                        <color key="backgroundColor" red="0.73725490199999999" green="0.1330000013" blue="0.29399999980000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="CV5-sJ-zLQ"/>
+                                            <constraint firstAttribute="height" constant="40" id="sLT-ft-qZ0"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Send Mail">
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="sendMailButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="U6i-Wd-A5C"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="kCG-Jg-PtI" secondAttribute="bottom" constant="2" id="NK9-OQ-SjN"/>
+                                    <constraint firstAttribute="trailing" secondItem="kCG-Jg-PtI" secondAttribute="trailing" constant="2" id="hnf-ub-7Ti"/>
+                                    <constraint firstItem="kCG-Jg-PtI" firstAttribute="top" secondItem="bjp-X8-05d" secondAttribute="top" constant="2" id="qYU-Df-5qU"/>
+                                    <constraint firstItem="kCG-Jg-PtI" firstAttribute="leading" secondItem="bjp-X8-05d" secondAttribute="leading" constant="2" id="smr-jH-2rx"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="bjp-X8-05d" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5ti-sn-qar"/>
                             <constraint firstItem="Bj8-tj-azI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="7d7-wQ-907"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="bjp-X8-05d" secondAttribute="bottom" constant="40" id="MEM-vP-e42"/>
+                            <constraint firstAttribute="bottom" secondItem="Bj8-tj-azI" secondAttribute="bottom" id="QH0-M4-9Yq"/>
+                            <constraint firstItem="PBM-6o-PHP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dJt-9v-Sfc"/>
                             <constraint firstItem="Bj8-tj-azI" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="eJ2-Uh-M0b"/>
+                            <constraint firstItem="PBM-6o-PHP" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ghv-PS-XFK"/>
                             <constraint firstItem="Bj8-tj-azI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ixn-Vf-NDF"/>
-                            <constraint firstAttribute="bottom" secondItem="Bj8-tj-azI" secondAttribute="bottom" id="rOX-4b-ujz"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Friend Contacts" id="3yO-DI-utk">
@@ -38,7 +75,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="buttonView" destination="bjp-X8-05d" id="hLK-uY-K2c"/>
                         <outlet property="contactsTabelView" destination="Bj8-tj-azI" id="keJ-oN-wFj"/>
+                        <outlet property="noContactsLabel" destination="PBM-6o-PHP" id="DZi-cX-EIX"/>
+                        <outlet property="sendMailButton" destination="kCG-Jg-PtI" id="gKC-a4-ESq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

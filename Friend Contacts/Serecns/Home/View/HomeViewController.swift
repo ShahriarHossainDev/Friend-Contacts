@@ -7,6 +7,7 @@
 
 import UIKit
 import ContactsUI
+import MessageUI
 
 class HomeViewController: UIViewController {
     
@@ -14,7 +15,12 @@ class HomeViewController: UIViewController {
     
     private let cellIdentifier: String = "homeCell"
     
+    private var selectedContacts: [CNContact] = []
+    
+    @IBOutlet weak var noContactsLabel: UILabel!
     @IBOutlet weak var contactsTabelView: UITableView!
+    @IBOutlet weak var buttonView: UIView!
+    @IBOutlet weak var sendMailButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,9 +29,21 @@ class HomeViewController: UIViewController {
         contactsTabelView.delegate = self
         contactsTabelView.dataSource = self
         
+        buttonView.layer.cornerRadius = 5
+        buttonView.dropShadow()
+        
+        sendMailButton.layer.cornerRadius = 5
+        
         self.contactsTabelView.register(UINib(nibName: "HomeTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         // Do any additional setup after loading the view.
+        
+        if friendsList.count != 0 {
+            noContactsLabel.isHidden = true
+        } else {
+            noContactsLabel.isHidden = false
+        }
     }
+    
     
     // MARK: - IBAction
     @IBAction func addFriendsBarButtonAction(_ sender: UIBarButtonItem) {
@@ -36,6 +54,23 @@ class HomeViewController: UIViewController {
         contactPicker.predicateForEnablingContact = NSPredicate(format: "emailAddresses.@count > 0")
         present(contactPicker, animated: true)
     }
+    
+    @IBAction func sendMailButtonAction(_ sender: UIButton) {
+        guard !selectedContacts.isEmpty else {
+            let alert = UIAlertController(title: "No Contacts Selected", message: "Please select at least one contact to send mail.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
+            return
+        }
+        
+        let mailComposerVC = MFMailComposeViewController()
+        mailComposerVC.mailComposeDelegate = self
+        mailComposerVC.setToRecipients(selectedContacts.compactMap { $0.emailAddresses.first?.value as String? })
+        mailComposerVC.setSubject("Hello")
+        mailComposerVC.setMessageBody("This is a random message.", isHTML: false)
+        present(mailComposerVC, animated: true)
+    }
+    
     
 }
 
@@ -48,7 +83,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? HomeTableViewCell {
-            //cell.configurateTheCell(recipes[indexPath.row])
+            
+            if friendsList.count != 0 {
+                noContactsLabel.isHidden = true
+            } else {
+                noContactsLabel.isHidden = false
+            }
+            
             let friend = friendsList[indexPath.row]
             cell.friend = friend
             return cell
@@ -71,7 +112,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         contactViewController.allowsEditing = false
         contactViewController.allowsActions = false
         
-        navigationController?.pushViewController(contactViewController, animated: true)
+        selectedContacts = [contact]
+        //navigationController?.pushViewController(contactViewController, animated: true)
     }
     
 }
@@ -87,5 +129,12 @@ extension HomeViewController: CNContactPickerDelegate {
             }
         }
         contactsTabelView.reloadData()
+    }
+}
+
+
+extension HomeViewController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        dismiss(animated: true, completion: nil)
     }
 }
