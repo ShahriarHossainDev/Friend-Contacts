@@ -68,21 +68,7 @@ class HomeViewController: UIViewController {
             
             sendMail(to: selectedContacts)
         }
- /*
-
-        guard MFMailComposeViewController.canSendMail() else {
-            let alert = UIAlertController(title: "Error", message: "Mail services are not available", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alert.addAction(okAction)
-            present(alert, animated: true)
-            return
-        }
-        
-        sendMail(to: selectedContacts)
- */
     }
-    
-    
 }
 
 
@@ -123,9 +109,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         contactViewController.allowsEditing = false
         contactViewController.allowsActions = false
         
-        
         selectedContacts = friend.workEmail
-        
         print(selectedContacts)
         //navigationController?.pushViewController(contactViewController, animated: true)
     }
@@ -148,6 +132,7 @@ extension HomeViewController: CNContactPickerDelegate {
 
 
 extension HomeViewController: MFMailComposeViewControllerDelegate {
+    
     func sendMail(to recipients: String) {
         let mailVC = MFMailComposeViewController()
         mailVC.mailComposeDelegate = self
